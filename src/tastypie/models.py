@@ -20,7 +20,7 @@ class ApiAccess(models.Model):
     accessed = models.PositiveIntegerField()
     
     def __unicode__(self):
-        return u"%s @ %s" % (self.identifer, self.accessed)
+        return u"%s @ %s" % (self.identifier, self.accessed)
     
     def save(self, *args, **kwargs):
         self.accessed = int(time.time())
@@ -58,13 +58,4 @@ if 'django.contrib.auth' in settings.INSTALLED_APPS:
         A signal for hooking up automatic ``ApiKey`` creation.
         """
         if kwargs.get('created') is True:
-
-            from django.db.utils import DatabaseError
-            try:
-                ApiKey.objects.create(user=kwargs.get('instance'))
-            except DatabaseError, e:
-                import logging
-                logging.warn(e)
-
-            
-            
+            ApiKey.objects.create(user=kwargs.get('instance'))
