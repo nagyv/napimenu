@@ -1,7 +1,7 @@
 An example backend for testing frontend frameworks
 ===================================================
 
-This project serves similar purposes to (TodoMVC)[http://addyosmani.github.com/todomvc/], but tries to be
+This project serves similar purposes to [TodoMVC](http://addyosmani.github.com/todomvc/), but tries to be
 a bit more complex in terms of the generated frontend.
 
 The current app provides the backend, and the features that frontends can support.
@@ -33,6 +33,6 @@ Frontend guidelines
 Views:
 _______
 
-# Have a listing of the daily menus uploaded for the current day
-# Selecting an item should show the menu details and the place details if any
-# When the place details are shown the user should be able to like/unlike the given place
+#. Have a listing of the daily menus uploaded for the current day
+#. Selecting an item should show the menu details and the place details if any
+#. When the place details are shown the user should be able to like/unlike the given place
