@@ -38,6 +38,23 @@ class MenuTest(ResourceTestCase):
         }
         self.assertHttpBadRequest(self.api_client.post('/api/v1/menu/', format='json', data=post_data))
 
+class PlaceTest(TestCase):
+
+    def test_no_ending_slash(self):
+        self.assertRaises(ValueError, models.Place.objects.create, name='Castro', address='', map_url='http://index.hu/valamimas/', 
+            base_url='http://index.hu/valami/')
+
+class DailyMenuTest(TestCase):
+
+    def setUp(self):
+        self.place = models.Place.objects.create(name='Castro', address='', map_url='http://index.hu/valamimas/', 
+            base_url='http://index.hu/valami')
+
+    def test_finding_place(self):
+        menu = models.DailyMenu.objects.create(where='Valahol', menu='valami', from_url='http://index.hu/valami/mas/')
+        self.assertEqual(menu.place.pk, self.place.pk)
+
+
 class SimpleTest(TestCase):
     def test_basic_addition(self):
         """

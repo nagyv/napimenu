@@ -6,6 +6,7 @@ from tastypie.api import Api
 api = Api(api_name='v1')
 
 api.register(resources.MenuResource())
+api.register(resources.PlaceResource())
 
 urlpatterns = patterns('',
     url(r'^$', 
@@ -22,5 +23,21 @@ urlpatterns = patterns('',
             model=models.DailyMenu,
         ),
         name='new_daily_menu'),
+
+    url(r'^places/$', 
+        ListView.as_view(
+            queryset=models.Place.objects.all()), 
+        name='place_list'),
+    url(r'^places/(?P<pk>\d+)/$', 
+        DetailView.as_view(
+            model=models.Place),
+        name='place_detail'),
+    url(r'^places/(?P<pk>\d+)/like/$', 
+        'menuk.views.place_like',
+        name='place_like'),
+    url(r'^places/(?P<pk>\d+)/unlike/$', 
+        'menuk.views.place_unlike',
+        name='place_like'),
+    
     url(r'^api/', include(api.urls)),
 )

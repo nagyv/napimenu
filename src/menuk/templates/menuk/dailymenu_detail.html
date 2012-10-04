@@ -2,3 +2,6 @@
 <date>{{object.day}}</date>
 <p>{{object.menu}}</p>
 <a href="{{object.from_url}}">Original</a>
+{% if object.place %}
+<a href="{{object.place.get_absolute_url}}">Helyszín</a>
+{% endif %}

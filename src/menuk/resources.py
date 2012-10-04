@@ -1,3 +1,4 @@
+import tastypie
 from tastypie.authorization import Authorization
 from tastypie.authentication import ApiKeyAuthentication, Authentication
 from tastypie.validation import CleanedDataFormValidation as FormValidation
@@ -6,7 +7,21 @@ from tastypie.resources import ALL, ALL_WITH_RELATIONS, convert_post_to_put, Mod
 import models
 import forms
 
+class PlaceResource(ModelResource):
+
+    class Meta:
+        queryset = models.Place.objects.all()
+        resource_name = 'place'
+        detail_allowed_methods = ['get']
+        list_allowed_methods = []
+        
+        object_class = models.DailyMenu
+        authentication = Authentication()
+        authorization = Authorization()
+
 class MenuResource(ModelResource):
+
+    place = tastypie.fields.ToOneField(attribute='place', to=PlaceResource, full=False)
 
     class Meta:        
         queryset = models.DailyMenu.current.all()
@@ -21,3 +36,4 @@ class MenuResource(ModelResource):
         object_class = models.DailyMenu
         authentication = Authentication()
         authorization = Authorization()
+
