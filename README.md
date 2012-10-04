@@ -33,6 +33,6 @@ Frontend guidelines
 Views:
 _______
 
-#. Have a listing of the daily menus uploaded for the current day
-#. Selecting an item should show the menu details and the place details if any
-#. When the place details are shown the user should be able to like/unlike the given place
+1. Have a listing of the daily menus uploaded for the current day
+1. Selecting an item should show the menu details and the place details if any
+1. When the place details are shown the user should be able to like/unlike the given place
