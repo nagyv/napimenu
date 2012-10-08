@@ -4,5 +4,13 @@
 		{
 			"path": "."
 		}
+	],
+	"build_systems": [
+		{
+			"name": "testacular",
+			"cmd": ["scripts/test.sh"],
+			"working_dir": "$project_path/angular",
+			"shell": false
+		}
 	]
 }
