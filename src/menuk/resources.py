@@ -13,7 +13,7 @@ class PlaceResource(ModelResource):
         queryset = models.Place.objects.all()
         resource_name = 'place'
         detail_allowed_methods = ['get']
-        list_allowed_methods = []
+        list_allowed_methods = ['get']
         
         object_class = models.DailyMenu
         authentication = Authentication()
