@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" ng-app="napimenu">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+  <div id="menu" ng-controller="PlaceCtrl">
+  <ul class="menu">
+    <li ng-repeat="place in places"><a href="#/place/{{place.id}}">{{place.name}}</a></li>
+  </ul>
+  </div>
+
+  <div ng-view>Please, choose a menu</div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+  -->
+  <script src="lib/lodash.min.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="js/app.js"></script>
+<!--  <script src="js/services.js"></script>-->
+  <script src="js/controllers.js"></script>
+  <!--<script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>-->
+</body>
+</html>

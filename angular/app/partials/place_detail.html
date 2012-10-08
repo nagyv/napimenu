@@ -1,0 +1,11 @@
+<!-- shows details about a given place -->
+<!-- shows details about a given place -->
+<div class="place">
+<h2>{{data.name}}</h2>
+{{data|json}}
+<button ng-click="like()">Like {{data.likes}}</button>
+<button ng-click="unlike()">Unlike {{data.unlikes}}</button>
+</div>
+<ul class="menus">
+	<li ng-repeat="menu in menus|orderBy:day">{{menu.day}}: {{menu.menu}}</li>
+</ul>
