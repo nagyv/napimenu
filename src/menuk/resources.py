@@ -9,6 +9,8 @@ import forms
 
 class PlaceResource(ModelResource):
 
+    menus = tastypie.fields.ToManyField(attribute='dailymenu_set', to='menuk.resources.MenuResource', full=False)
+
     class Meta:
         queryset = models.Place.objects.all()
         resource_name = 'place'
