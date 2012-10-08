@@ -26,7 +26,7 @@ class MenuResource(ModelResource):
     place = tastypie.fields.ToOneField(attribute='place', to=PlaceResource, full=False)
 
     class Meta:        
-        queryset = models.DailyMenu.current.all()
+        queryset = models.DailyMenu.objects.all()
         resource_name = 'menu'
 
         #TODO: remove get!
@@ -39,3 +39,15 @@ class MenuResource(ModelResource):
         authentication = Authentication()
         authorization = Authorization()
 
+class DailyMenuResource(ModelResource):
+
+    place = tastypie.fields.ToOneField(attribute='place', to=PlaceResource, full=False)
+
+    class Meta:        
+        queryset = models.DailyMenu.current.all()
+        resource_name = 'daily'
+
+        #TODO: remove get!
+        list_allowed_methods = ['get']
+        authentication = Authentication()
+        authorization = Authorization()

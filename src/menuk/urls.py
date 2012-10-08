@@ -6,6 +6,7 @@ from tastypie.api import Api
 api = Api(api_name='v1')
 
 api.register(resources.MenuResource())
+api.register(resources.DailyMenuResource())
 api.register(resources.PlaceResource())
 
 urlpatterns = patterns('',
