@@ -17,6 +17,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
+    'django.contrib.staticfiles',
     # 'django.contrib.comments',
     'djangotoolbox',
     'autoload',
@@ -26,6 +27,7 @@ INSTALLED_APPS = (
     'djangoappengine',
 
     'menuk',
+    'app',
 )
 
 MIDDLEWARE_CLASSES = (
