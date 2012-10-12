@@ -1,0 +1,2 @@
+var napimenu_dom = document.getElementById('napimenu-dom')
+napimenu_dom.innerHTML = '<form action=\'http://napi-menu.appspot.com/new/\' method="post"><legend>Send in a menu for today!</legend><label>Where</label><input name="where" type="text" value=\'' + document.title + '\' /><label><textarea name=\'menu\' rows=\'3\'></textarea></label><input type=\'hidden\' name=\'from_url\' value=\'' + window.location.href + '\'/><button type="submit" class="btn">Submit</button></form>'

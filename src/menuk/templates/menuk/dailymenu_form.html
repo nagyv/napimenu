@@ -3,3 +3,5 @@
 {{ form.as_p }}
 <button type="submit">Submit</button>
 </form>
+
+<a href="javascript:(function(){if(!document.getElementById('napimenu-dom')){ var napimenu_dom=document.createElement('DIV');napimenu_dom.id='napimenu-dom'; napimenu_script=document.createElement('SCRIPT');napimenu_script.id='napimenu-script';napimenu_script.type='text/javascript';napimenu_script.src='//napi-menu.appspot.com/static/menuk/js/bookmarklet.js?x='+(Math.random());document.getElementsByTagName('head')[0].appendChild(napimenu_script); napimenu_dom.innerHTML=''; document.getElementsByTagName('body')[0].appendChild(napimenu_dom); var css = document.createElement('style');css.type = 'text/css';css.innerHTML = '#napimenu-dom{position:fixed;bottom:15px;z-index:100001;left:40%;margin-left:-60px;background-color:#aaffaa;padding:20px 60px;}';document.body.appendChild(css); } else { var napimenu_dom=document.getElementById('napimenu-dom');napimenu_dom.parentNode.removeChild(napimenu_dom); var napimenu_script=document.getElementById('napimenu-script');napimenu_script.parentNode.removeChild(napimenu_script); }})();">Add a `napimenü`</a>

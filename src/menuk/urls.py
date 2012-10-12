@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import DetailView, CreateView, ListView
 import models, forms, resources
 
@@ -8,6 +9,16 @@ api = Api(api_name='v1')
 api.register(resources.MenuResource())
 api.register(resources.DailyMenuResource())
 api.register(resources.PlaceResource())
+
+class PrefilledCreateView(CreateView):
+    def get_initial(self):
+        """
+        Returns the initial data to use for forms on this view.
+        """
+        data = {}
+        for key, value in self.request.GET.items():
+            data[key] = value
+        return data
 
 urlpatterns = patterns('',
     url(r'^$', 
@@ -19,10 +30,10 @@ urlpatterns = patterns('',
             model=models.DailyMenu),
         name='daily_menu_detail'),
     url(r'^new/$', 
-        CreateView.as_view(
+        csrf_exempt(PrefilledCreateView.as_view(
             form_class=forms.DailyMenuForm,
             model=models.DailyMenu,
-        ),
+        )),
         name='new_daily_menu'),
 
     url(r'^places/$', 
