@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Daily Menu</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <style type="text/css">
+            .hidden{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+         <header>
+            <h1>Daily Menu</h1>
+            <h3 class="date" id="date">Day</h3>
+        </header>
+        <div class="clear"></div>
+
+        <div id="app-container">
+            <div id="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Restaurant name</th>
+                            <th>Menu</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind='foreach: menuList'>
+                        <tr data-bind='click: $root.changeDetailedMenu'>
+                            <td class="menuRow" data-bind='text: name()'></td>
+                            <td class="menuRow" data-bind='text: menu()'></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <aside id="detailed-view-container" data-bind="visible: detailedMenu().name">
+                <div>
+                    <h2 data-bind='text: detailedMenu().name' >Restaurant Name</h2>
+                    <h3>Menu today:</h3>
+                    <p data-bind='text: detailedMenu().menu'>soemthing to eat</p>
+                    <div data-bind="visible: detailedMenu().address">
+                        <h3>Address:</h3>
+                        <p data-bind='text: detailedMenu().address'></p>
+                        <button id="like-button" data-bind="text: detailedMenu().likeText, click: detailedMenu().addLike">Like</button>
+                        <button id="unlike-button" data-bind="text: detailedMenu().unlikeText, click: detailedMenu().addUnlike">Unlike</button>
+                    </div>
+                    
+                </div>
+            </aside>
+        </div>
+
+        <footer>
+            <p>Pulilab 2012</p>
+        </footer>
+        
+        <script type="text/javascript" src="libs/jquery-1.8.2.min.js"></script>
+        <script src="libs/knockout-2.1.0.js"></script>
+        <script type="text/javascript" src="src/app.js"></script>
+        <script type="text/javascript">
+            // Showing the date
+            $(function(){
+                $('.date').html(new Date().toLocaleDateString());
+            });
+        </script>
+    </body>
+</html>
