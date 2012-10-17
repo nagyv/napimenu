@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Daily Menu</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <style type="text/css">
+            .hidden{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Daily Menu</h1>
+            <h3 class="date">Day</h3>
+        </header>
+        <div class="clear"></div>
+
+        <footer>
+            <p>Pulilab 2012</p>
+        </footer>
+
+        <!-- The layout template -->
+         <script type="text/template" id="layout-template">
+                <div id="table-container"></div>
+                <aside id="detailed-view-container"></aside>
+        </script>
+
+        <!-- The template for the table -->
+        <script type="text/template" id="table-template">
+                <thead>
+                    <tr>
+                        <th>Restaurant name</th>
+                        <th>Menu</th>
+                    </tr>
+                </thead>
+
+                <!--We generates the rows dinamicaly-->
+                <tbody></tbody>
+        </script>
+
+        <!--Menu item - single view-->
+        <script type="text/template" id="item-template">
+                <h2><%= restaurantName %></h2>
+                <h3>Menu today:</h3>
+                <p><%= menu  %></p>
+                <h3>Address:</h3>
+                <p><%= typeof(address) !== 'undefined' ? address : 'N/A'  %></p>
+        </script>
+
+        <!-- Menu item in the table -->
+        <script type="text/template" id="item-row-template">
+                <td><%= restaurantName %></td>
+                <td><%= menu %></td>
+        </script>
+        
+        <script type="text/javascript" src="libs/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="libs/underscore-min.js"></script>
+        <script type="text/javascript" src="libs/backbone-min.js"></script>
+        <script type="text/javascript" src="libs/backbone.marionette.min.js"></script>
+        <script type="text/javascript" src="src/app.js"></script>
+        <script type="text/javascript">
+            // Showing the date
+            $(function(){
+                $('.date').html(new Date().toLocaleDateString());
+            });
+        </script>
+    </body>
+</html>
