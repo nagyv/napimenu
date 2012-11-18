@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Daily Menu</title>
-        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="style.css">
         <style type="text/css">
             .hidden{
                 display: none;
@@ -23,8 +23,10 @@
 
         <!-- The layout template -->
          <script type="text/template" id="layout-template">
+            <div id="#app-container">
                 <div id="table-container"></div>
                 <aside id="detailed-view-container"></aside>
+            </div>
         </script>
 
         <!-- The template for the table -->
@@ -44,12 +46,11 @@
 
         <!--Menu item - single view-->
         <script type="text/template" id="item-template">
-
-                <h2><%= restaurantName %></h2>
-                <h3>Menu today:</h3>
-                <p><%= menu  %></p>
-                <h3>Address:</h3>
-                <p><%= typeof(address) !== 'undefined' ? address : 'N/A'  %></p>
+            <h2 id='#details-name'>Test Name</h2>
+            <h3>Menu today:</h3>
+            <p id='#details-menu'>Test Menu</p>
+            <h3>Address:</h3>
+            <p id="#details-address">Adress</p>
         </script>
 
         <!-- Menu item in the table -->
@@ -59,9 +60,6 @@
         </script>
         
         <script type="text/javascript" src="libs/jquery-1.8.2.min.js"></script>
-        <script type="text/javascript" src="libs/underscore-min.js"></script>
-        <script type="text/javascript" src="libs/backbone-min.js"></script>
-        <script type="text/javascript" src="libs/backbone.marionette.min.js"></script>
         <script type="text/javascript" src="src/app.js"></script>
         <script type="text/javascript">
             // Showing the date
