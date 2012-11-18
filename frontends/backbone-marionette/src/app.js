@@ -15,8 +15,6 @@ $(function(){
     var MenuList = Backbone.Collection.extend({
         model: Menu,
         initialize: function(){
-            console.log('container');
-            console.log(this);
             this.reset();
         }
     });
@@ -75,8 +73,6 @@ $(function(){
         },
 
         onRender: function(){
-            console.log(this.model.get('menu'));
-            console.log(this.$el);
             this.$el.html(this.compiledTemplate(this.model.toJSON()));
         },
 

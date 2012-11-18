@@ -1,8 +1,13 @@
 define(['Models/DailyMenu'], function(DailyMenu){
 	var menuDetailsItemView = Backbone.Marionette.ItemView.extend({
 		model: DailyMenu,
-		template: '#item-template'
+		template: '#item-template',
+
+		initialize: function(){
+			App.vent('details:updateView');
+			console.log('hi');
+		}
 	});
 
-	return new menuDetailsItemView;
+	return new menuDetailsItemView();
 });

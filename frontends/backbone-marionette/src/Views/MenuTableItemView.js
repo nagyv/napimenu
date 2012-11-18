@@ -3,7 +3,11 @@ define(['Models/DailyMenu'], function(DailyMenu){
 		model: DailyMenu,
         template: "#item-row-template",
         tagName: "tr",
-        className: "menuRow"
+        className: "menuRow",
+
+        showDetails: function(){
+        	App.vent('views:updateDetails');
+        }
 	});
 
 	return new menuTableItemView;

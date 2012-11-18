@@ -19,4 +19,5 @@ require([
 
 		//start our app
 		App.start();
+
 });
