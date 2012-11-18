@@ -3,10 +3,6 @@ define(function(){
 		defaults: {
 			place: 'N/A',
 			menu: 'N/A'
-		},
-
-		initialize: function(){
-			console.log(this);
 		}
 	});
 
