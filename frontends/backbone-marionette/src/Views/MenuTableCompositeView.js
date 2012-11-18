@@ -1,0 +1,3 @@
+define(['Views/MenuTableItemView'], function(){
+
+});

@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>Daily Menu</title>
-        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="http://napi-menu.appspot.com/static/css/style.css">
+        <!-- <link rel="stylesheet" href="/static/css/style.css"> -->
         <style type="text/css">
             .hidden{
                 display: none;
@@ -42,16 +43,15 @@
 
         <!--Menu item - single view-->
         <script type="text/template" id="item-template">
-                <h2><%= restaurantName %></h2>
+                <h2><%= place %></h2>
                 <h3>Menu today:</h3>
                 <p><%= menu  %></p>
                 <h3>Address:</h3>
-                <p><%= typeof(address) !== 'undefined' ? address : 'N/A'  %></p>
         </script>
 
         <!-- Menu item in the table -->
         <script type="text/template" id="item-row-template">
-                <td><%= restaurantName %></td>
+                <td><%= place %></td>
                 <td><%= menu %></td>
         </script>
         
@@ -59,7 +59,8 @@
         <script type="text/javascript" src="libs/underscore-min.js"></script>
         <script type="text/javascript" src="libs/backbone-min.js"></script>
         <script type="text/javascript" src="libs/backbone.marionette.min.js"></script>
-        <script type="text/javascript" src="src/app.js"></script>
+        <script data-main="src/main" src="libs/require.js"></script>
+
         <script type="text/javascript">
             // Showing the date
             $(function(){
