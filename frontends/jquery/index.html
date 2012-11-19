@@ -46,17 +46,19 @@
 
         <!--Menu item - single view-->
         <script type="text/template" id="item-template">
-            <h2 id='#details-name'>Test Name</h2>
+            <h2 id='details-name'>Test Name</h2>
             <h3>Menu today:</h3>
-            <p id='#details-menu'>Test Menu</p>
+            <p id='details-menu'>Test Menu</p>
             <h3>Address:</h3>
-            <p id="#details-address">Adress</p>
+            <p id="details-address">Address</p>
         </script>
 
         <!-- Menu item in the table -->
         <script type="text/template" id="item-row-template">
-                <td><%= restaurantName %></td>
-                <td><%= menu %></td>
+            <tr class="menuRow">
+                <td class="place">'N/A'</td>
+                <td class="menu">'N/A'</td>
+            </tr>
         </script>
         
         <script type="text/javascript" src="libs/jquery-1.8.2.min.js"></script>

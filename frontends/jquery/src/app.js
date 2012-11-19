@@ -22,9 +22,40 @@ var DailyMenu = function(){
 		$('#detailed-view-container').append($('#item-template').html());
 	}
 
+	//add the correct row to the app
+	function addTableRow(menuToAdd){
+		var rowToAdd = $('#item-row-template').html();
+
+
+		$('tbody').append(rowToAdd);		
+		$('td.place:last').html(menuToAdd.place);
+		$('.menu:last').html(menuToAdd.menu);
+	}
+
+	//update the details view
+	function updateDisplay(modelToUpdate){
+		$('#details-name').text(modelToUpdate.name);
+		$('#details-menu').text(modelToUpdate.menu);
+		$('#details-address').text(modelToUpdate.address);
+	}
+
+	//handling the events
+	function handleEvents(){
+		$('tr').live('click', function(event){
+			console.log(event.target);
+		});
+	}
+
+	
+
 	return{
-		createLayout: createLayout
+		createLayout: createLayout,
+		addTableRow: addTableRow,
+		handleEvents: handleEvents
 	}
 }();
 
 DailyMenu.createLayout();
+DailyMenu.handleEvents();
+DailyMenu.addTableRow({place: 'Test Name', menu: 'Test Menu'});
+DailyMenu.addTableRow({place: 'Other Test Name', menu: 'Other Menu'});
