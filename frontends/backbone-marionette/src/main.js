@@ -15,19 +15,17 @@ require([
 			var layout = new AppLayout();
 			$('header').after(layout.render().el);
 
+			//the collection of daily menus
+			var menuList = new MenuList([
+        		new DailyMenu({menu: 'Test', place: new Place({restaurantName: 'Ahoj', address: 'Szeged'}) }),
+        		new DailyMenu({menu: 'other menu', place: new Place()})
+	        ]);
+
 			//setting the regions
 	        layout.table.show(new MenuTableCompositeView({
-	        	collection: new MenuList([
-	        		new DailyMenu({menu: 'Test', place: new Place({restaurantName: 'Ahoj'}) }),
-	        		new DailyMenu({menu: 'other menu', place: new Place()})
-	        	])
+	        	collection: menuList
 	        }));
-	        layout.details.show(new MenuDetailsView({model: new DailyMenu({
-	        	menu: 'Menu Test', 
-	        	place: new Place({
-	        		restaurantName: "Peti's",
-	        		address: 'Szeged'
-	        	}) }) }));
+	        layout.details.show(new MenuDetailsView({model: menuList.at(0)}));
 		})
 
 		//start our app
