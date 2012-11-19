@@ -1,16 +1,9 @@
 var DailyMenu = function(){
 
-	//The Menu model
-	var DailyMenu = {
-		name: 'N/A',
-		place: 'N/A'
-	};
+	//the list that stores the menus
+	var menuList = [];
 
-	//The Place model
-	var Place = {
-		name: 'N/A',
-		address: 'N/A'
-	};
+	//LAYOUT
 
 	//Add the table and the basic layout
 	function createLayout(){
@@ -26,36 +19,73 @@ var DailyMenu = function(){
 	function addTableRow(menuToAdd){
 		var rowToAdd = $('#item-row-template').html();
 
+		//default value for restaurant name
+		var restaurantName = " "
+		if(typeof menuToAdd.place !== 'undefined'){
+			var restaurantName = menuToAdd.place.restaurantName || " ";
+		}
 
-		$('tbody').append(rowToAdd);		
-		$('td.place:last').html(menuToAdd.place);
+		$('tbody').append(rowToAdd);
+		$('tr:last').attr('data-id', menuList.length-1);	
+		$('td.place:last').html(restaurantName);
 		$('.menu:last').html(menuToAdd.menu);
 	}
 
 	//update the details view
 	function updateDisplay(modelToUpdate){
-		$('#details-name').text(modelToUpdate.name);
+
+		//default values
+		var restaurantName = " "
+		if(typeof modelToUpdate.place !== 'undefined'){
+			var restaurantName =  modelToUpdate.place.restaurantName;
+		}
+		
+		$('#details-name').text(restaurantName);
 		$('#details-menu').text(modelToUpdate.menu);
+
+		//we only show this if there is an address
+
 		$('#details-address').text(modelToUpdate.address);
 	}
 
+	//add a new menu item
+	function addMenu(menuToAdd){
+		menuToAdd.menu = menuToAdd.menu || 'N/A';
+		menuList.push(menuToAdd);
+		addTableRow(menuToAdd);
+	}
+
+	//EVENTS
 	//handling the events
 	function handleEvents(){
+
+		//calls the details view update function with the correct model
 		$('tr').live('click', function(event){
-			console.log(event.target);
+			updateDisplay(menuList[$(this).data('id')]);
 		});
 	}
 
+	//APPLICATION
+
+	function startApp(){
+		createLayout();
+		handleEvents();
+		addMenu({menu: 'Teszt kaja'});
+		addMenu({menu: 'Teszt étel', place: {
+			restaurantName: 'La Étterem',
+			address: 'Starling City',
+			like: 0,
+			dislike: 0,
+		}});
+
+		//we set the details view to the first menu item
+		$('.menuRow').eq(0).click();
+	}
 	
 
 	return{
-		createLayout: createLayout,
-		addTableRow: addTableRow,
-		handleEvents: handleEvents
+		startApp: startApp
 	}
 }();
 
-DailyMenu.createLayout();
-DailyMenu.handleEvents();
-DailyMenu.addTableRow({place: 'Test Name', menu: 'Test Menu'});
-DailyMenu.addTableRow({place: 'Other Test Name', menu: 'Other Menu'});
+DailyMenu.startApp();
