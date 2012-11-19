@@ -6,5 +6,5 @@ define(function(){
 		}
 	});
 
-	return new DailyMenu;
+	return DailyMenu;
 });
