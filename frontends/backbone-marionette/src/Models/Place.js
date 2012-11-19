@@ -1,11 +1,15 @@
 define(function(){
 	var Place = Backbone.Model.extend({
 		defaults: {
-			restaurantName: 'N/A',
-			address: 'N/A',
+			restaurantName: '',
+			address: '',
 			like: 0,
 			unlike: 0
-		}
+		},
+
+        intialize: function(){
+            console.log('lofasz');
+        }
 	});
 
 	return Place;

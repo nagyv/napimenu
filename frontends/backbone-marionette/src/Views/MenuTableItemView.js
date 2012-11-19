@@ -4,9 +4,12 @@ define(['Models/DailyMenu'], function(DailyMenu){
                 template: "#item-row-template",
                 tagName: "tr",
                 className: "menuRow",
+                events: {
+                        "click": "showDetails"
+                },
 
                 showDetails: function(){
-                	App.vent.trigger('views:updateDetails');
+                        App.vent.trigger('views:onUpdateDetails', this.model);
                 }
         });
 
