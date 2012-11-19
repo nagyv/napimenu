@@ -9,5 +9,5 @@ define(['Models/DailyMenu'], function(DailyMenu){
 		}
 	});
 
-	return new menuDetailsItemView();
+	return menuDetailsItemView;
 });

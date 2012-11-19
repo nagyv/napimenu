@@ -10,5 +10,5 @@ define(['Models/DailyMenu'], function(DailyMenu){
                 }
         });
 
-        return new menuTableItemView;
+        return menuTableItemView;
 });

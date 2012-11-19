@@ -9,12 +9,12 @@ require([
 
 		//the initializer sets up our app and starts everything
 		App.addInitializer(function(){
-			AppLayout.render();
-			$('header').after(AppLayout.el);
+			var layout = new AppLayout();
+			$('header').after(layout.render().el);
 
 			//setting the regions
-	        AppLayout.table.show(MenuTableCompositeView);
-	        AppLayout.details.show(MenuDetailsView);
+	        layout.table.show( new MenuTableCompositeView());
+	        layout.details.show(new MenuDetailsView());
 		})
 
 		//start our app

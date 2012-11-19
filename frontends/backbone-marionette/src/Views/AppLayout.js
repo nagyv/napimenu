@@ -9,5 +9,5 @@ define( function(){
         }
 	});
 
-	return new AppLayout;
+	return AppLayout;
 })

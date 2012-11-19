@@ -11,6 +11,6 @@ define(['Models/DailyMenu', 'Collections/MenuList', 'Views/MenuTableItemView'], 
         }
 	});
 
-	return new menuTableCompositeView
+	return menuTableCompositeView
 	
 });

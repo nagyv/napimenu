@@ -6,5 +6,5 @@ define(['Models/DailyMenu'], function(DailyMenu){
 		}
 	});
 
-	return new MenuList;
+	return MenuList;
 });
