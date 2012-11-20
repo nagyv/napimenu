@@ -21,6 +21,8 @@ require([
         		new DailyMenu({menu: 'other menu', place: new Place()})
 	        ]);
 
+	        // menuList.fetch();
+
 			//setting the regions
 	        layout.table.show(new MenuTableCompositeView({
 	        	collection: menuList
