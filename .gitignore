@@ -1,3 +1,4 @@
 /src/static
 /src/.gaedata/datastore
 /src/.google_appengine
+*.pyc
