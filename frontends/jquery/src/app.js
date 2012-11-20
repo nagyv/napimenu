@@ -2,6 +2,7 @@ var DailyMenu = function(){
 
 	//the list that stores the menus
 	var menuList = [];
+	var currentModelId = 0;
 
 	//LAYOUT
 
@@ -43,9 +44,21 @@ var DailyMenu = function(){
 		$('#details-name').text(restaurantName);
 		$('#details-menu').text(modelToUpdate.menu);
 
-		//we only show this if there is an address
+		
 
-		$('#details-address').text(modelToUpdate.address);
+		if(typeof modelToUpdate.place !== 'undefined' && typeof modelToUpdate.place.address !== 'undefined'){
+
+			//we only show the buttons if there is an address
+			$('#details-address').text(modelToUpdate.place.address);
+			$('#like-num').text(modelToUpdate.place.like);
+			$('#unlike-num').text(modelToUpdate.place.unlike);
+
+			$('.address-block').show();
+		}else{
+
+			//else we hide the whole div
+			$('.address-block').hide();
+		}
 	}
 
 	//add a new menu item
@@ -61,7 +74,22 @@ var DailyMenu = function(){
 
 		//calls the details view update function with the correct model
 		$('tr').live('click', function(event){
-			updateDisplay(menuList[$(this).data('id')]);
+			currentModelId = $(this).data('id');
+			updateDisplay(menuList[currentModelId]);
+		});
+
+		//updates the models when clicked on like
+		$('#like-button').click(function(){
+			menuList[currentModelId].place.like++;
+			$('#like-num').text(menuList[currentModelId].place.like);
+
+		});
+
+		//updates the models when clicked on unlike
+		$('#unlike-button').click(function(){
+			menuList[currentModelId].place.unlike++;
+			$('#unlike-num').text(menuList[currentModelId].place.unlike);
+
 		});
 	}
 
@@ -75,7 +103,13 @@ var DailyMenu = function(){
 			restaurantName: 'La Étterem',
 			address: 'Starling City',
 			like: 0,
-			dislike: 0,
+			unlike: 0,
+		}});
+		addMenu({menu: 'Joker pörkölt', place: {
+			restaurantName: 'The Bat',
+			address: 'GothamCity',
+			like: 0,
+			unlike: 0,
 		}});
 
 		//we set the details view to the first menu item
