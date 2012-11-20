@@ -3,7 +3,8 @@ define(['Models/DailyMenu', 'Collections/MenuList', 'Views/MenuTableItemView'], 
 		itemView: MenuTableItemView,
         template: "#table-template",
         itemViewContainer: "tbody",
-        tagName: 'table'
+        tagName: 'div',
+        className: 'span8'
 	});
 
 	return menuTableCompositeView

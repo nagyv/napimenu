@@ -14,7 +14,7 @@ require([
 		App.addInitializer(function(){
 			var layout = new AppLayout();
 			$('header').after(layout.render().el);
-
+			
 			//the collection of daily menus
 			var menuList = new MenuList([
         		new DailyMenu({menu: 'Test', place: new Place({restaurantName: 'Ahoj', address: 'Szeged'}) }),
