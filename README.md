@@ -36,3 +36,20 @@ _______
 1. Have a listing of the daily menus uploaded for the current day
 1. Selecting an item should show the menu details and the place details if any
 1. When the place details are shown the user should be able to like/unlike the given place
+
+Dev install
+------------
+
+You can use vagrant to set up a VirtualBox with pre-configured appengine.
+
+To start up the virtual box run
+
+    $ vagrant up
+    
+SSH into the box,
+
+    $ vagrant ssh 
+    
+and start appengine
+
+    $ dev_appserver.py /vagrant/src/ --port 3000 --address 0.0.0.0
