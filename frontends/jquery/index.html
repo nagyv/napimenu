@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <title>Daily Menu</title>
-        <!-- <link rel="stylesheet" href="http://napi-menu.appspot.com/static/css/style.css"> -->
         <link rel="stylesheet" href="style.css">
         <style type="text/css">
             .hidden{
@@ -24,8 +23,10 @@
 
         <!-- The layout template -->
          <script type="text/template" id="layout-template">
+            <div id="#app-container">
                 <div id="table-container"></div>
                 <aside id="detailed-view-container"></aside>
+            </div>
         </script>
 
         <!-- The template for the table -->
@@ -45,37 +46,32 @@
 
         <!--Menu item - single view-->
         <script type="text/template" id="item-template">
-                <h2><%= place.attributes.restaurantName %></h2>
-
-                <h3>Menu today:</h3>
-                <p><%= menu  %></p>
-                <div class='address-block'>
+            <h2 id='details-name'>Test Name</h2>
+            <h3>Menu today:</h3>
+            <p id='details-menu'>Test Menu</p>
+            
+            <div class='address-block'>
                     <h3>Address:</h3>
-                    <p><%= place.attributes.address %></p>
-                    <button id="like-button">Like (<%= place.attributes.like %>)</button>
-                    <button id="unlike-button">Unlike ( <%= place.attributes.unlike %> )</button>
-                </div>
+                    <p id="details-address">Address</p>
+                    <button id="like-button">Like (<span id="like-num"></span>)</button>
+                    <button id="unlike-button">Unlike (<span id="unlike-num"></span>)</button>
+            </div>
         </script>
 
         <!-- Menu item in the table -->
         <script type="text/template" id="item-row-template">
-                <td><%= place.attributes.restaurantName %></td>
-                <td><%= menu %></td>
+            <tr class="menuRow">
+                <td class="place">'N/A'</td>
+                <td class="menu">'N/A'</td>
+            </tr>
         </script>
         
         <script type="text/javascript" src="libs/jquery-1.8.2.min.js"></script>
-        <script type="text/javascript" src="libs/underscore-min.js"></script>
-        <script type="text/javascript" src="libs/backbone-min.js"></script>
-        <script type="text/javascript" src="libs/backbone.marionette.min.js"></script>
-        <script type="text/javascript" src="libs/backbone-tastypie/backbone-tastypie.js"></script>
-        <script data-main="src/main" src="libs/require.js"></script>
-
+        <script type="text/javascript" src="src/app.js"></script>
         <script type="text/javascript">
-            
             // Showing the date
             $(function(){
                 $('.date').html(new Date().toLocaleDateString());
-                App = new Backbone.Marionette.Application();
             });
         </script>
     </body>
