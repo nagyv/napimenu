@@ -42,7 +42,6 @@
 
         <!-- The template for the table -->
         <script type="text/template" id="table-template">
-            <div class="span8">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -54,7 +53,6 @@
                     <!--We generates the rows dinamicaly-->
                     <tbody></tbody>
                 </table>
-            </div>
         </script>
 
         <!--Menu item - single view-->
@@ -67,8 +65,13 @@
                 <div class='address-block'>
                     <h5>Location:</h5>
                     <p><%= place.attributes.address %></p>
-                    <button id="like-button">Like (<%= place.attributes.like %>)</button>
-                    <button id="unlike-button">Unlike ( <%= place.attributes.unlike %> )</button>
+
+                    <hr>
+                    
+                    <div class="buttons">
+                      <button id="like-button" class="btn btn-small btn-primary" type="button"><i class="icon-thumbs-up icon-white"></i> Like <small><%= place.attributes.like %></small></button>
+                      <button id="unlike-button" class="btn btn-small btn-danger" type="button"><i class="icon-thumbs-down icon-white"></i> Dislike <small><%= place.attributes.unlike %></small></button>
+                    </div>
                 </div>
             </div>
         </script>
