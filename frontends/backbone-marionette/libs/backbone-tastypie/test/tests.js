@@ -8,22 +8,9 @@ var test_users = _([
     {id:7, username:"azat", resource_uri:'/api/v1/user/7/'}
 ]);
 
-function mock_create_user(request) {
-    test_users.push({id:8, username:'zolivar', resource_uri:'/api/v1/user/8/'})
-    return {
-        status: 201,
-        headers: {Location: '/api/v1/user/8/'},
-        success: true,
-        responseText: null
-    };    
-}
-
 $.mockjax(function(request){
-    if(request.type == 'POST') 
-        return mock_create_user(request)
-
     var userDetail = request.url.match(/\/api\/v1\/user\/(\d+)\/$/i);
-     
+ 
     if (userDetail) {
         var userId = userDetail[1];
 
@@ -33,11 +20,6 @@ $.mockjax(function(request){
                 return user.id == userDetail[1];
             })
         };
-    } else if (request.url.match(/\/api\/v1\/user\/mymethod\//i)) {
-        return {
-            responseText: request.data,
-            success: true
-        }
     }
 
     var qs = {};
@@ -69,11 +51,11 @@ $.mockjax(function(request){
     };
 });
 
-var User = Backbone.Model.extend({
+var User = Backbone.Tastypie.Model.extend({
     urlRoot: '/api/v1/user/'
 });
 
-var Users = Backbone.Collection.extend({
+var Users = Backbone.Tastypie.Collection.extend({
     urlRoot: '/api/v1/user/',
     model: User
 });
@@ -150,8 +132,8 @@ test("new model url", function() {
 });
 
 test("model meta", function() {
-    var Foo = Backbone.Collection.extend();
-    var Bar = Backbone.Collection.extend();
+    var Foo = Backbone.Tastypie.Collection.extend();
+    var Bar = Backbone.Tastypie.Collection.extend();
 
     foo = new Foo();
     bar = new Bar();
@@ -160,23 +142,3 @@ test("model meta", function() {
 
     notEqual(foo.meta.offset, bar.meta.offset);
 });
-
-asyncTest("testing model creation", 3, function(){
-  var users = new Users();  
-  users.create({'username': 'zolivar'}, {success: function(user, response){
-    equal(response.username, 'zolivar')
-    equal(response.id, 8)
-    equal(response.resource_uri, '/api/v1/user/8/')
-    start();
-  }})
-})
-
-asyncTest('testing custom api calls', 1, function() {
-    var users = new Users()
-    users.api('/mymethod', {
-        data: {d: 123}, 
-        success: function(response, status, xhr){
-            equal(response.d, 123)
-            start()
-    }})
-})

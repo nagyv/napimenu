@@ -1,7 +1,7 @@
 define(['Models/DailyMenu'], function(DailyMenu){
-	var MenuList = Backbone.Collection.extend({
-		model: DailyMenu,
-        url: '/menus/api/v1/daily/'
+	var MenuList = Backbone.Tastypie.Collection.extend({
+		urlRoot: '/menus/api/v1/daily/',
+        model: DailyMenu
 	});
 
 	return MenuList;

@@ -1,128 +1,30 @@
-(function (root, factory) {
-  if (typeof exports === 'object') {
-
-    var jquery = require('jquery');
-    var underscore = require('underscore');
-    var backbone = require('backbone');
-
-    module.exports = factory(jquery, underscore, backbone);
-  } else {
-    this.bpm = factory(jQuery, _, Backbone)
-  } 
-}(this, function($, _, Backbone) {
+(function($, _, Backbone) {
     Backbone.Tastypie = {
-        defaultLimit: 20,
-        doGetOnEmptyPostResponse: true,
-        doGetOnEmptyPutResponse: false,
-        apiKey: {
-            username: '',
-            key: ''
-        }
+        defaultLimit: 20
     };
 
-    /**
-     * Override Backbone's sync function, to do a GET upon receiving a HTTP CREATED.
-     * This requires 2 requests to do a create, so you may want to use some other method in production.
-     * Modified from http://joshbohde.com/blog/backbonejs-and-django
-     */
-    Backbone.Tastypie.sync = function( method, model, options ) {
-        var headers = {};
-
-        if ( Backbone.Tastypie.apiKey && Backbone.Tastypie.apiKey.username.length ) {
-            headers = _.extend( {
-                'Authorization': 'ApiKey ' + Backbone.Tastypie.apiKey.username + ':' + Backbone.Tastypie.apiKey.key
-            }, options.headers );
-            options.headers = headers;
-        }
-
-        if ( ( method === 'create' && Backbone.Tastypie.doGetOnEmptyPostResponse ) ||
-            ( method === 'update' && Backbone.Tastypie.doGetOnEmptyPutResponse ) ) {
-            var dfd = new $.Deferred();
-
-            // Set up 'success' handling
-            dfd.done( options.success );
-            options.success = function( resp, status, xhr ) {
-                // If create is successful but doesn't return a response, fire an extra GET.
-                // Otherwise, resolve the deferred (which triggers the original 'success' callbacks).
-                if ( !resp && ( xhr.status === 201 || xhr.status === 202 || xhr.status === 204 ) ) { // 201 CREATED, 202 ACCEPTED or 204 NO CONTENT; response null or empty.
-                    var location = xhr.getResponseHeader( 'Location' ) || model.id;
-                    return $.ajax( {
-                           url: location,
-                           headers: headers,
-                           success: dfd.resolve,
-                           error: dfd.reject
-                        });
-                }
-                else {
-                    return dfd.resolveWith( options.context || options, [ resp, status, xhr ] );
-                }
-            };
-
-            // Set up 'error' handling
-            dfd.fail( options.error );
-            options.error = function( xhr, status, resp ) {
-                dfd.rejectWith( options.context || options, [ xhr, status, resp ] );
-            };
-
-            // Make the request, make it accessibly by assigning it to the 'request' property on the deferred
-            dfd.request = Backbone.sync( method, model, options );
-            return dfd;
-        }
-
-        return Backbone.sync( method, model, options );
-    };
-
-    Backbone.Tastypie.Model = Backbone.RelationalModel.extend({
+    Backbone.Tastypie.Model = Backbone.Model.extend({
         idAttribute: 'resource_uri',
-        sync: Backbone.Tastypie.sync,
+
         url: function() {
             var url = getValue(this, 'urlRoot') || getValue(this.collection, 'urlRoot') || urlError();
             
             if (this.isNew())
                 return url;
 
-            return this.get('resource_uri') || this.id;
+            return this.get('resource_uri');
         },
         _getId: function() {
             if (this.has('id'))
                 return this.get('id');
 
             return _.chain(this.get('resource_uri').split('/')).compact().last().value();
-        },
-        _getUri: function(id) {
-            return this.urlRoot + id + '/'
-        },
-        get_or_fetch: function(itemid, options) {
-          options = options || {};
-          options = $.extend({use_ajax: true}, options)
-          var use_ajax = options.use_ajax;
-          var item = false
-          if (this.collection) item = this.collection.get(itemid);
-          if (!item) {
-            // download character from the server
-            item = new this.constructor({resource_uri: itemid});
-            options = $.extend({async: use_ajax}, options);
-            var deferred = item.fetch(options);
-          } else if (options.success) {
-            options.success(item)
-          }
-          return (!item && use_ajax) ? deferred : item;
-        },
-        api: function(url, options) {
-            options = options || {}
-            var u = this.url()
-            options.url = u.substr(0,u.lastIndexOf('/')) + url + '/'
-            _.defaults(options, {
-                dataType: 'json'
-            })
-            return $.ajax(options)
         }
-    })
+    });
 
     Backbone.Tastypie.Collection = Backbone.Collection.extend({
-        sync: Backbone.Tastypie.sync,
-        initialize: function(collections, options) {
-            _.bindAll(this, 'fetchNext', 'fetchPrevious');
+        constructor: function(models, options) {
+            Backbone.Collection.prototype.constructor.apply(this, arguments);
 
             this.meta = {};
             this.filters = {
@@ -136,8 +38,8 @@
         url: function(models) {
             var url = this.urlRoot;
 
-            if (this.length > 0) {
-                var ids = _.map(this.models, function(model) {
+            if (models) {
+                var ids = _.map(models, function(model) {
                     return model._getId();
                 });
 
@@ -145,21 +47,6 @@
             }
 
             return url + this._getQueryString();
-        },
-        api: function(url, options) {
-            options = options || {}
-            var u = this.url()
-            if (u.indexOf('?') != -1) {
-                url = u.substr(0,u.lastIndexOf('/')) + url + u.substr(u.lastIndexOf('/'))
-            }
-            options.url = url
-            _.defaults(options, {
-                dataType: 'json'
-            })
-            return $.ajax(options)
-        },
-        _getUri: function(id) {
-            return this.urlRoot + id + '/'
         },
         parse: function(response) {
             if (response && response.meta)
@@ -199,23 +86,6 @@
                 return '';
 
             return '?' + $.param(this.filters);
-        },
-        get_or_fetch: function(itemid, options) {
-          options = options || {};
-          options = $.extend({use_ajax: true}, options)
-          var use_ajax = options.use_ajax;
-          var item = this.get(itemid);
-          if (!item) {
-            // download character from the server
-            item = new this.model();
-            item.id = itemid;
-            options = $.extend({async: use_ajax}, options);
-            var deferred = item.fetch(options);
-            if(options.add) this.add(item);
-          } else if (options.success) {
-            options.success(item)
-          }
-          return (!item && use_ajax) ? deferred : item;
         }
     });
 
@@ -231,4 +101,4 @@
     var urlError = function() {
         throw new Error('A "url" property or function must be specified');
     };
-}));
+})(window.$, window._, window.Backbone);

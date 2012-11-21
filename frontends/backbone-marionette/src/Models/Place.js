@@ -1,13 +1,13 @@
 define(function(){
-	var Place = Backbone.Model.extend({
-		defaults: {
+	var Place = Backbone.Tastypie.Model.extend({
+		urlRoot: '/menus/api/v1/daily/',
+        defaults: {
 			restaurantName: '',
 			like: 0,
 			unlike: 0
 		},
-
-        intialize: function(){
-            console.log('lofasz');
+        initialize: function(){
+            console.log(this);
         }
 	});
 

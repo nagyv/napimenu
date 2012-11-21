@@ -41,17 +41,17 @@ var DailyMenu = function(){
 			var restaurantName =  modelToUpdate.place.restaurantName;
 		}
 		
-		$('#details-name').text(restaurantName);
-		$('#details-menu').text(modelToUpdate.menu);
+		$('#details-name').html(restaurantName);
+		$('#details-menu').html(modelToUpdate.menu);
 
 		
 
 		if(typeof modelToUpdate.place !== 'undefined' && typeof modelToUpdate.place.address !== 'undefined'){
 
 			//we only show the buttons if there is an address
-			$('#details-address').text(modelToUpdate.place.address);
-			$('#like-num').text(modelToUpdate.place.like);
-			$('#unlike-num').text(modelToUpdate.place.unlike);
+			$('#details-address').html(modelToUpdate.place.address);
+			$('#like-num').html(modelToUpdate.place.like);
+			$('#unlike-num').html(modelToUpdate.place.unlike);
 
 			$('.address-block').show();
 		}else{
@@ -98,23 +98,38 @@ var DailyMenu = function(){
 	function startApp(){
 		createLayout();
 		handleEvents();
-		addMenu({menu: 'Teszt kaja'});
-		addMenu({menu: 'Teszt étel', place: {
-			restaurantName: 'La Étterem',
-			address: 'Starling City',
-			like: 0,
-			unlike: 0,
-		}});
-		addMenu({menu: 'Joker pörkölt', place: {
-			restaurantName: 'The Bat',
-			address: 'GothamCity',
-			like: 0,
-			unlike: 0,
-		}});
+		addMenu({
+			menu: 'Magyaros gombaleves <br> Falusi csirkecomb tepsis burgonya <br> Szilvás joghurtos pite',
+			place: {
+				restaurantName: 'Szeged Étterem', 
+        		address: '6720 Szeged, Széchenyi tér 9.',
+				like: 0,
+				unlike: 0,
+			}
+		});
+
+		addMenu({
+			menu: 'Bableves <br> Juhtúró,sonkával töltött szelet,steak burgonya', 
+			place: {
+				restaurantName: 'Brnoi Étterem'
+			}
+		});
+
+		addMenu({
+			menu: 'Frankfurti leves <br> Hawaii csirkemell vegyes körettel',
+			place: {
+				restaurantName: 'Etazs Étterem', 
+        		address: 'Szeged, Gogol u. 9.',
+				like: 0,
+				unlike: 0,
+			}
+		});
 
 		//we set the details view to the first menu item
 		$('.menuRow').eq(0).click();
 	}
+
+
 	
 
 	return{

@@ -34,8 +34,8 @@
                             </thead>
                             <tbody data-bind='foreach: menuList'>
                                 <tr data-bind='click: $root.changeDetailedMenu'>
-                                    <td class="menuRow" data-bind='text: name()'></td>
-                                    <td class="menuRow" data-bind='text: menu()'></td>
+                                    <td class="menuRow" data-bind='html: name()'></td>
+                                    <td class="menuRow" data-bind='html: menu()'></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -43,12 +43,12 @@
 
                     <aside class="span3 offset1" id="detailed-view-container" data-bind="visible: detailedMenu().name">
                         <div>
-                            <h3 data-bind='text: detailedMenu().name' >Restaurant Name</h3>
+                            <h3 data-bind='html: detailedMenu().name' >Restaurant Name</h3>
                             <h5>Menu today:</h5>
-                            <p data-bind='text: detailedMenu().menu'>soemthing to eat</p>
+                            <p data-bind='html: detailedMenu().menu'>soemthing to eat</p>
                             <div data-bind="visible: detailedMenu().address">
                                 <h5>Address:</h5>
-                                <p data-bind='text: detailedMenu().address'></p>
+                                <p data-bind='html: detailedMenu().address'></p>
                                 <hr>
                                 <div class="buttons">
                                     <button class="btn btn-small btn-primary" type="button" id="like-button" data-bind="text: detailedMenu().likeText, click: detailedMenu().addLike"><i class="icon-thumbs-up icon-white"></i>Like</button>
