@@ -41,7 +41,7 @@ class MenuResource(ModelResource):
 
 class DailyMenuResource(ModelResource):
 
-    place = tastypie.fields.ToOneField(attribute='place', to=PlaceResource, full=False)
+    place = tastypie.fields.ToOneField(attribute='place', to=PlaceResource, full=False, null=True)
 
     class Meta:        
         queryset = models.DailyMenu.current.all()
