@@ -1,21 +1,32 @@
 {% extends 'base.html' %}
 {% block title %}Napi menük{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="/static/style/bootstrap.css">
+{% endblock %}
+
 
 {% block content %}
-<h1>Napi menük</h1>
-<p>
-Hi, this is a test app similar to <a href="http://todomvc.com">TodoMVC</a>. The main difference between the two is that we've tried to come up with a still simple, but already a bit more demanding requirements, like related models and several views on a page. 
-</p>
-<p>We think that the apps we have to build with these JS frameworks definitely need these requirements.</p>
+            
+            <h3>About</h3>
+            <p>
+            Hi, this is a test app similar to <a href="http://todomvc.com">TodoMVC</a>. The main difference between the two is that we've tried to come up with a still simple, but already a bit more demanding requirements, like related models and several views on a page. 
+            </p>
+            <p>We think that the apps we have to build with these JS frameworks definitely need these requirements.</p>
 
 
-<p>Our project is a work in progress. The current implementation are the following:
-<ul>
-	<li><a href="/menus/">Non-js site</a></li>
-	<li><a href="/static/angular/index.html">Angular JS</a></li>
-	<li><a href="/static/backbone-marionette/index.html">Backbone with Marionette</a></li>
-	<li><a href="/static/knockout/index.html">Knockout JS</a></li>
-</ul>
-Our code is available on <a href="https://github.com/nagyv/napimenu">Github</a>. Feel free to join us!
-</p>
+            <h3>Where can I find the apps?</h3>
+            <p>Our project is a work in progress. The current implementation are the following:
+            <ul>
+            	<li><a href="/menus/">Non-js site</a></li>
+                <li><a href="/static/jquery/index.html">Pure jQuery</a></li>
+            	<li><a href="/static/angular/index.html">Angular JS</a></li>
+            	<li><a href="/static/backbone-marionette/index.html">Backbone with Marionette</a></li>
+            	<li><a href="/static/knockout/index.html">Knockout JS</a></li>
+
+            </ul>
+
+        Our code is available on <a href="https://github.com/nagyv/napimenu">Github</a>. Feel free to join us!
+        </p>
+    
+
 {% endblock %}
