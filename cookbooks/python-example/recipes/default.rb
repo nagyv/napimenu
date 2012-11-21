@@ -4,10 +4,14 @@ include_recipe "python::pip"
 include_recipe "python::virtualenv"
 
 package "unzip"
-
 package "python-dev"
+package "mc"
 
 python_pip "PIL" do
+  action :install
+end
+
+python_pip "ipdb" do
   action :install
 end
 
