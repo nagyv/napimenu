@@ -18,33 +18,41 @@
   </head>
 
   <body>
-    <div id="header">
-      <a id="logo" href="/">Nonrel-testapp</a>
-    </div>
+    <div id="wrap">
+      <div id="container">
+       <div class="container">
+                <div class="page-header">
+                  <h1>Daily menu</h1>
+                </div>
 
-    <div class="columns">
-      <div id="content" class="column">
-        {% block content-header %}
-          {% if error %}<div class="error">{{ error }}</div>{% endif %}
-          {% if info %}<div class="info">{{ info }}</div>{% endif %}
-          {% if messages %}
-            {% for message in messages %}
-              <div class="info">{{ message }}</div>
-            {% endfor %}
-          {% endif %}
-        {% endblock %}
+        <div class="columns">
+          <div id="content" class="column span8">
+            {% block content-header %}
+              {% if error %}<div class="error">{{ error }}</div>{% endif %}
+              {% if info %}<div class="info">{{ info }}</div>{% endif %}
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="info">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endblock %}
 
-        {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
+          </div>
+
+          <div id="sidebar" class="column">
+            {% block sidebar %}
+            {% endblock %}
+          </div>
+        </div>
       </div>
-
-      <div id="sidebar" class="column">
-        {% block sidebar %}
-        {% endblock %}
-      </div>
+      <div id="push"></div>
     </div>
 
     <div id="footer">
-      <p>Powered by <a href="https://github.com/django-nonrel">Django-nonrel</a></p>
+      <div class="container">
+            <p class="muted credit">Daily menu created by <a href="https://github.com/nagyv">Viktor</a> and <a href="https://github.com/RichardOtvos">Richard </a> at <a href="http://pulilab.com">Pulilab</a>. Powered by <a href="https://github.com/django-nonrel">Django-nonrel</a></p>
+            </div>
     </div>
 
     {% block js %}

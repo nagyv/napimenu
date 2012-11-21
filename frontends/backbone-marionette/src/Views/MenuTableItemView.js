@@ -9,6 +9,8 @@ define(['Models/DailyMenu'], function(DailyMenu){
                 },
 
                 showDetails: function(){
+                        $('.success').removeClass('success');
+                        this.$el.addClass('success');
                         App.vent.trigger('views:onUpdateDetails', this.model);
                 }
         });
