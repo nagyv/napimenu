@@ -5,6 +5,7 @@ from djangoappengine.settings_base import *
 
 import os
 
+PROJECT_ROOT = os.path.dirname(__file__)
 # Activate django-dbindexer for the default database
 DATABASES['native'] = DATABASES['default']
 DATABASES['default'] = {'ENGINE': 'dbindexer', 'TARGET': 'native'}
@@ -30,6 +31,9 @@ INSTALLED_APPS = (
     'app',
 )
 
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_URL = '/static'
+
 MIDDLEWARE_CLASSES = (
     # This loads the index definitions, so it has to come first
     'autoload.middleware.AutoloadMiddleware',
@@ -50,7 +54,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 TEST_RUNNER = 'djangotoolbox.test.CapturingTestSuiteRunner'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), 'templates'),)
+TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, 'templates'),)
 
 ROOT_URLCONF = 'urls'
 
